@@ -1,0 +1,9 @@
+/*
+/*/
+!/.gitignore
+
+!/dustypst.typ
+!/langs.typ
+!/lang_de.typ
+
+!/fonts/
