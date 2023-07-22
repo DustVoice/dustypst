@@ -3,6 +3,7 @@
 #let default_font = (
   name: "Inter",
   name_raw: "JetBrains Mono",
+  name_fallback: "Linux Libertine",
   size: 13pt,
 )
 
@@ -110,7 +111,7 @@
 #let code(root: false, lang: "", content) = {
   let text_content = [
     #if root {
-      emoji.key + h(.2em)
+      emoji.lock + h(.2em)
     }
     #raw(
       lang: lang,
@@ -146,7 +147,7 @@
   let title = [
     #let add_space = false
     #if readonly {
-      emoji.lock
+      emoji.glasses
       add_space = true
     }
     #if exec {
@@ -154,7 +155,7 @@
       add_space = true
     }
     #if perm {
-      emoji.key
+      emoji.lock
       add_space = true
     }
     #if add_space {
@@ -216,7 +217,7 @@
       ) {
         if repo.at(2).len() > 0 {
           [
-            / #repo.at(0): #link(repo.at(1), emoji.chain)\ #{
+            / #repo.at(0): #link(repo.at(1), emoji.globe.eu.af)\ #{
               repo.at(2).split(" ").map(pkg => {
                 pkg-link(plain: true, nofn: true, aur: repo.at(0) == "AUR", pkg)
               }).join(" " + sym.hyph.point + " ")
@@ -284,7 +285,7 @@
       emoji.window
     }
     #if root {
-      emoji.key + h(1em)
+      emoji.lock + h(1em)
     }
     #path
   ]
@@ -311,7 +312,7 @@
   outlined: true,
   body,
 ) = {
-  set text(font: font.name, size: font.size, lang: lang.lang)
+  set text(font: (font.name, font.name_fallback), size: font.size, lang: lang.lang)
   
   show raw: set text(font: font.name_raw)
 
@@ -372,7 +373,7 @@
   
   set page(numbering: "1", number-align: center)
   
-  set text(font: font.name, size: font.size, lang: lang.lang)
+  set text(font: (font.name, font.name_fallback), size: font.size, lang: lang.lang)
   
   show raw: set text(font: font.name_raw)
 
